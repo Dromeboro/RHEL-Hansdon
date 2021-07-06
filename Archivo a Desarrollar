@@ -1,0 +1,124 @@
+#! /bin/bash
+
+
+
+
+
+echo  "1. El S.O Debe estar full actualizado a la fecha (no debe tener actualizaciones pendientes)"
+echo "Punto 1" >> caso2.txt
+yum update --assumeno >> caso2.txt
+echo >> caso2.txt
+
+echo  "2. Debe tener Red configurada con: (Direccion IP, Mascara, Puerta de enlace, DNS)"
+echo "Punto 2" >> caso2.txt
+ip a >>  caso2.txt
+echo >> caso2.txt
+ip route  >>  caso2.txt
+echo >> caso2.txt
+cat /etc/resolv.conf >>  caso2.txt
+echo >> caso2.txt
+
+echo  "3. Debe tener el servicio de SELinux activo"
+echo "Punto 3" >> caso2.txt
+getenforce  >> caso2.txt
+echo >> caso2.txt
+
+echo "4. Debe tener el servicio de firewalld en ejecución y con los puertos 22 (SSH) y el servicio de firewall *samba*"
+echo "Punto 4" >> caso2.txt
+firewall-cmd --list-all >> caso2.txt
+echo >> caso2.txt
+
+echo "5. El servicio de SSH **NO** debe permitir hacer sessiones graficas por SSH (X11Forwarding)"
+echo "Punto 5" >> caso2.txt
+grep -i X11Forwarding /etc/ssh/sshd_config >> caso2.txt
+echo >> caso2.txt
+
+echo "6. Debe crear cinco (5) usuarios adicional con su respectivas contraseñas seguras asignadas: compras, comercial, ventas, administrativo, soporte"
+echo "Punto 6" >> caso2.txt
+id compras >> caso2.txt
+id comercial >> caso2.txt
+id ventas >> caso2.txt
+id administrativo >> caso2.txt
+id soporte >> caso2.txt
+echo >> caso2.txt
+
+
+
+echo "7. Todos estos usuario deben pertenecer a un grupo adicional llamado ahino"
+echo "Punto 7" >> caso2.txt
+id compras >> caso2.txt
+id comercial >> caso2.txt
+id ventas >> caso2.txt
+id administrativo >> caso2.txt
+id soporte >> caso2.txt
+echo >> caso2.txt
+
+
+echo "8. Las contraseñas de estos usuarios debe caducar cada 3 meses"
+echo "Punto 8" >> caso2.txt
+chage -l compras >> caso2.txt
+chage -l comercial >> caso2.txt
+chage -l ventas >> caso2.txt
+chage -l administrativo >> caso2.txt
+chage -l soporte >> caso2.txt
+echo >> caso2.txt
+
+
+echo "9. Debe tener instalado la última versión de los paquetes: samba y samba-client"
+echo "Punto 9" >> caso2.txt
+yum install --assumeno samba samba-client >> caso2.txt
+echo >> caso2.txt
+
+
+echo "10. Debe crear una carpeta llamada /guias que pertenezca al grupo ahino y que los usuario que pertenezcan a este grupo puedan leer, escribir, ejecutar sobre esta carpeta"
+echo "Punto 10" >> caso2.txt
+ls -ld /guias & >> caso2.txt
+echo >> caso2.txt
+
+echo "11. Cree 100 archivos de texto vacíos sobre la carpeta /guias con el nombre que usted desee"
+echo "Punto 11" >> caso2.txt
+ls -l /guias | wc -l >> caso2.txt
+echo >> caso2.txt
+
+
+echo "12. Garantice que el servicio llamado cups no se encuentre activo y que no inicie después del reinicio de la máquina"
+echo "Punto 12" >> caso2.txt
+systemctl is-enabled cups >> caso2.txt
+echo >> caso2.txt
+
+echo "13 Indique la versión exacta del sistema operativo"
+echo "Punto 13" >> caso2.txt
+echo -n  "   Nombre del S.O, version, release: "
+read so
+echo $so >> caso2.txt
+echo >> caso2.txt
+
+echo "14. Cree una subcarpeta llamada /guias/config y copie en esta ubicación los archivos /etc/redhat-release, /etc/passwd y /usr/share/dict/linux.words"
+echo "Punto 14" >> caso2.txt
+ls -ld /guias/config &>> caso2.txt
+ls -l /guias/config &>> caso2.txt
+echo >> caso2.txt
+
+echo "15. Cree un enlace simbólico llamado /guias/config/grupos apuntando al archivo /etc/group"
+echo "Punto 15" >> caso2.txt
+ls -l /guias/config/grupos &>> caso2.txt
+echo >> caso2.txt
+
+echo "16. Incluya el mensaje "El problema no es problema" en el archivo /etc/motd, para que cuando un usuario haga login se muestra el MOTD (mensaje del dia)"
+echo "Punto 16" >> caso2.txt
+cat /etc/issue >> caso2.txt
+echo >> caso2.txt
+
+
+echo "17. Liste las particiones y los puntos de montaje de su sistema operativo y envíe la salida al archivo /tmp/particiones.txt"
+echo "Punto 17" >> caso2.txt
+cat /tmp/particiones.txt >> caso2.txt
+echo >> caso2.txt
+
+echo "18 Indique qué sistema de archivos tiene su partición /" 
+echo "Punto 18" >> caso2.txt
+echo -n "   Sistema de archivos: "
+read fs1
+echo $fs1 >> caso2.txt
+df -Th / >> caso2.txt
+
